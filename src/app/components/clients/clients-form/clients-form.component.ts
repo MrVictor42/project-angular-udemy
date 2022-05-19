@@ -10,10 +10,12 @@ import { Client } from '../client';
 })
 export class ClientsFormComponent implements OnInit {
 
-    client : Client 
+    client: Client = new Client;
+    success: boolean = false;
+    errors: string[] = [];
 
     constructor(private clientService : ClientsService) {
-        this.client = clientService.getCliente();
+        
     }
 
     ngOnInit(): void {
@@ -21,6 +23,13 @@ export class ClientsFormComponent implements OnInit {
     }
 
     onSubmit() {
-        console.log(this.client)
+        this.clientService.salvar(this.client).subscribe(response => {
+            this.success = true;
+            this.errors = [];
+            this.client = response;
+        }, errorResponse => {
+            this.success = false;
+            this.errors = errorResponse.error.errors;
+        });
     }
 }
