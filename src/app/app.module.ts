@@ -10,6 +10,7 @@ import { SidebarComponent } from './template/sidebar/sidebar.component';
 import { HomeComponent } from './home/home.component';
 import { ClientsFormComponent } from './components/clients/clients-form/clients-form.component';
 import { ClientsService } from './components/clients.service';
+import { ClientListComponent } from './components/clients/client-list/client-list.component';
 
 @NgModule({
 	declarations: [
@@ -17,7 +18,8 @@ import { ClientsService } from './components/clients.service';
 		NavbarComponent,
 		SidebarComponent,
 		HomeComponent,
-		ClientsFormComponent
+		ClientsFormComponent,
+  ClientListComponent
 	],
 	imports: [
 		BrowserModule,
