@@ -4,6 +4,16 @@
 </ol>
 <div class="container">
     <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-success" role="alert" *ngIf="mensagemSucesso">
+                {{ mensagemSucesso }}
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="mensagemErro">
+                {{ mensagemErro }}
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-2">
             <button class="btn btn-warning" (click)="novoCadastro()">
                 <i class="fa fa-plus"></i>
@@ -11,7 +21,7 @@
             </button>
         </div>
     </div>
-    <br/>
+    <br />
     <div class="row">
         <div class="col-md-12">
             <table class="table table-hover">
@@ -30,14 +40,39 @@
                         <td> {{ client.nome }}</td>
                         <td> {{ client.cpf }}</td>
                         <td> {{ client.dataCadastro }} </td>
-                        <td> 
+                        <td>
                             <button class="btn btn-primary" routerLink="/client-form/{{ client.id }}">
                                 <i class="fa fa-edit"></i>
-                            </button>    
+                            </button>
+                            <button class="btn btn-danger ml-1" data-toggle="modal" data-target="#exampleModal" (click)="preparaDelecao(client)">
+                                <i class="fa fa-trash"></i>
+                            </button>
                         </td>
                     </tr>
                 </tbody>
             </table>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" *ngIf="clienteSelecionado">
+                    Confirmação a deleção do(a) Cliente {{ clienteSelecionado.nome }} ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" (click)="deletarCliente()" data-dismiss="modal">
+                        Confirmar
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
