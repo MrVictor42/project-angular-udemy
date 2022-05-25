@@ -13,11 +13,17 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: '', component: LayoutComponent, children: [
         { path: 'home', component: HomeComponent },
-        { path: 'client-form', component: ClientsFormComponent },
-        { path: 'client-form/:id', component: ClientsFormComponent },
-        { path: 'client-list', component: ClientListComponent },
-        { path: 'servico-prestado-form', component: ServicoPrestadoFormComponent },
-        { path: 'servico-prestado-listagem', component: ServicoPrestadoListaComponent }
+        { path: 'clientes', children: [
+            { path: 'form', component: ClientsFormComponent },
+            { path: 'form/:id', component: ClientsFormComponent },
+            { path: 'list', component: ClientListComponent },
+            { path: '', redirectTo: '/clientes/list', pathMatch: 'full' }
+        ]},
+        { path: 'servico-prestado', children: [
+            { path: 'form', component: ServicoPrestadoFormComponent },
+            { path: 'listagem', component: ServicoPrestadoListaComponent },
+            { path: '', redirectTo: '/servico-prestado/listagem', pathMatch: 'full' }
+        ]}
     ]}
 ];
 

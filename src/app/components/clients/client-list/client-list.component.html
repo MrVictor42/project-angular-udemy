@@ -41,7 +41,7 @@
                         <td> {{ client.cpf }}</td>
                         <td> {{ client.dataCadastro }} </td>
                         <td>
-                            <button class="btn btn-primary" routerLink="/client-form/{{ client.id }}">
+                            <button class="btn btn-primary" routerLink="/clientes/form/{{ client.id }}">
                                 <i class="fa fa-edit"></i>
                             </button>
                             <button class="btn btn-danger ml-1" data-toggle="modal" data-target="#exampleModal" (click)="preparaDelecao(client)">

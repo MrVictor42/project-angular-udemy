@@ -58,6 +58,6 @@ export class ClientsFormComponent implements OnInit {
     }
 
     voltar() {
-        this.router.navigate(["client-list"]);
+        this.router.navigate(["clientes/list"]);
     }
 }
