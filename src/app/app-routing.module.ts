@@ -3,31 +3,22 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { ClientListComponent } from './components/clients/client-list/client-list.component';
 import { ClientsFormComponent } from './components/clients/clients-form/clients-form.component';
+import { LoginComponent } from './components/login/login.component';
 import { ServicoPrestadoFormComponent } from './components/servico-prestado/servico-prestado-form/servico-prestado-form.component';
 import { ServicoPrestadoListaComponent } from './components/servico-prestado/servico-prestado-lista/servico-prestado-lista.component';
 import { HomeComponent } from './home/home.component';
+import { LayoutComponent } from './layout/layout.component';
 
 const routes: Routes = [
-    {
-        path: 'home',
-        component: HomeComponent
-    }, {
-        path: 'client-form',
-        component: ClientsFormComponent
-    }, {
-        path: 'client-form/:id',
-        component: ClientsFormComponent
-    }
-    , {
-        path: 'client-list',
-        component: ClientListComponent
-    }, {
-        path: 'servico-prestado-form',
-        component: ServicoPrestadoFormComponent
-    }, {
-        path: 'servico-prestado-listagem',
-        component: ServicoPrestadoListaComponent
-    }
+    { path: 'login', component: LoginComponent },
+    { path: '', component: LayoutComponent, children: [
+        { path: 'home', component: HomeComponent },
+        { path: 'client-form', component: ClientsFormComponent },
+        { path: 'client-form/:id', component: ClientsFormComponent },
+        { path: 'client-list', component: ClientListComponent },
+        { path: 'servico-prestado-form', component: ServicoPrestadoFormComponent },
+        { path: 'servico-prestado-listagem', component: ServicoPrestadoListaComponent }
+    ]}
 ];
 
 @NgModule({

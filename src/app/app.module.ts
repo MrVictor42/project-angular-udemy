@@ -14,6 +14,8 @@ import { ClientListComponent } from './components/clients/client-list/client-lis
 import { ServicoPrestadoFormComponent } from './components/servico-prestado/servico-prestado-form/servico-prestado-form.component';
 import { ServicoPrestadoListaComponent } from './components/servico-prestado/servico-prestado-lista/servico-prestado-lista.component';
 import { ServicoPrestadoService } from './components/servico-prestado/servico-prestado.service';
+import { LoginComponent } from './components/login/login.component';
+import { LayoutComponent } from './layout/layout.component';
 
 @NgModule({
 	declarations: [
@@ -24,7 +26,9 @@ import { ServicoPrestadoService } from './components/servico-prestado/servico-pr
 		ClientsFormComponent,
 		ClientListComponent,
 		ServicoPrestadoFormComponent,
-		ServicoPrestadoListaComponent
+		ServicoPrestadoListaComponent,
+		LoginComponent,
+  LayoutComponent
 	],
 	imports: [
 		BrowserModule,
@@ -38,6 +42,6 @@ import { ServicoPrestadoService } from './components/servico-prestado/servico-pr
 	],
 	bootstrap: [AppComponent]
 })
-export class AppModule { 
+export class AppModule {
 
 }
