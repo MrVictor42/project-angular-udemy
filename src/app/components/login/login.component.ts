@@ -23,7 +23,12 @@ export class LoginComponent implements OnInit {
 	}
 
 	onSubmit() {
-		this.router.navigate(['/home'])
+		this.authService.login(this.username, this.password).subscribe(response => {
+			console.log(response)
+			this.router.navigate(['/home'])
+		}, erroResponse => {
+			this.errors = ["Usuário e/ou senha incorreto(s)."];
+		});
 	}
 
 	preparaCadastrar(event: { preventDefault: () => void; }) {
@@ -44,6 +49,9 @@ export class LoginComponent implements OnInit {
 		this.authService.salvar(usuario).subscribe(response => {
 			this.mensagemSucesso = "Cadastro realizado com sucesso! Efetue o Login.";
 			this.errors = [];
+			this.cadastrando = false;
+			this.username = "";
+			this.password = "";
 		}, erroResponse => {
 			this.mensagemSucesso = null;
 			this.errors = erroResponse.error.errors;
