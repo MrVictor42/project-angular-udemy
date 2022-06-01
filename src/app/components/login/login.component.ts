@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth.service';
+import { Usuario } from '../model/usuario';
 
 @Component({
 	selector: 'app-login',
@@ -8,12 +10,13 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-	username : string = "";
-	password : string = "";
-	loginError : boolean = false;
-	cadastrando : boolean = false;
+	username: string = "";
+	password: string = "";
+	cadastrando: boolean = false;
+	mensagemSucesso: string | null = "";
+	errors: string[] = [];
 
-	constructor(private router : Router) { }
+	constructor(private router: Router, private authService: AuthService) { }
 
 	ngOnInit(): void {
 
@@ -30,5 +33,20 @@ export class LoginComponent implements OnInit {
 
 	cancelaCadastro() {
 		this.cadastrando = false;
+	}
+
+	cadastrar() {
+		const usuario: Usuario = new Usuario();
+
+		usuario.username = this.username;
+		usuario.password = this.password;
+
+		this.authService.salvar(usuario).subscribe(response => {
+			this.mensagemSucesso = "Cadastro realizado com sucesso! Efetue o Login.";
+			this.errors = [];
+		}, erroResponse => {
+			this.mensagemSucesso = null;
+			this.errors = erroResponse.error.errors;
+		});
 	}
 }
