@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './template/navbar/navbar.component';
@@ -17,6 +17,7 @@ import { ServicoPrestadoService } from './components/servico-prestado/servico-pr
 import { LoginComponent } from './components/login/login.component';
 import { LayoutComponent } from './layout/layout.component';
 import { AuthService } from './auth.service';
+import { TokenInterceptor } from './token.interceptor';
 
 @NgModule({
 	declarations: [
@@ -29,7 +30,7 @@ import { AuthService } from './auth.service';
 		ServicoPrestadoFormComponent,
 		ServicoPrestadoListaComponent,
 		LoginComponent,
-  LayoutComponent
+		LayoutComponent
 	],
 	imports: [
 		BrowserModule,
@@ -40,7 +41,11 @@ import { AuthService } from './auth.service';
 	providers: [
 		ClientsService,
 		ServicoPrestadoService,
-		AuthService
+		AuthService, {
+			provide: HTTP_INTERCEPTORS,
+			useClass: TokenInterceptor,
+			multi: true
+		}
 	],
 	bootstrap: [AppComponent]
 })

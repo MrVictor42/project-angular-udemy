@@ -24,7 +24,8 @@ export class LoginComponent implements OnInit {
 
 	onSubmit() {
 		this.authService.login(this.username, this.password).subscribe(response => {
-			console.log(response)
+			const access_token = JSON.stringify(response);
+			localStorage.setItem("access_token", access_token);
 			this.router.navigate(['/home'])
 		}, erroResponse => {
 			this.errors = ["Usuário e/ou senha incorreto(s)."];
@@ -53,6 +54,7 @@ export class LoginComponent implements OnInit {
 			this.username = "";
 			this.password = "";
 		}, erroResponse => {
+			console.log(erroResponse)
 			this.mensagemSucesso = null;
 			this.errors = erroResponse.error.errors;
 		});
