@@ -21,6 +21,21 @@ export class AuthService {
 
 	}
 
+	encerrarSessao() {
+		localStorage.removeItem("access_token");
+	}
+
+	getUsuarioAutenticado() {
+		const token = this.obterToken();
+
+		if(token) {
+			const usuario = this.jwtHelper.decodeToken(token).user_name;
+			return usuario;
+		} else {
+			return null;
+		}
+	}
+
 	obterToken() {
 		const tokenString = localStorage.getItem("access_token")
 

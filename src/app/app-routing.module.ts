@@ -13,14 +13,17 @@ import { LayoutComponent } from './layout/layout.component';
 const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: '', component: LayoutComponent, children: [
-        { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-        { path: 'clientes', children: [
+        { path: 'home', component: HomeComponent, canActivate: [ AuthGuard ] },
+        { path: '', redirectTo: '/home', pathMatch: 'full' },
+        { path: 'clientes', canActivate: [ AuthGuard ], children: [
+            { path: 'clientes', redirectTo: '/home', pathMatch: 'full' },
             { path: 'form', component: ClientsFormComponent },
             { path: 'form/:id', component: ClientsFormComponent },
             { path: 'list', component: ClientListComponent },
             { path: '', redirectTo: '/clientes/list', pathMatch: 'full' }
         ]},
-        { path: 'servico-prestado', children: [
+        { path: 'servico-prestado', canActivate: [ AuthGuard ], children: [
+            { path: 'servico-prestado', redirectTo: '/home', pathMatch: 'full' },
             { path: 'form', component: ServicoPrestadoFormComponent },
             { path: 'listagem', component: ServicoPrestadoListaComponent },
             { path: '', redirectTo: '/servico-prestado/listagem', pathMatch: 'full' }
